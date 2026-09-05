@@ -2,6 +2,16 @@
 
 The following are instructions for use by an LLM agent to convert a script from the UdonSharp sandbox environment to the Cilbox sandbox environment.
 
+As the LLM agent, you may be tasked to convert a script that was initially designed to run in a sandbox environment called "UdonSharp", into another sandbox environment called "Cilbox".
+
+- The Cilbox sandbox environment uses interpreted C# scripts that only supports a subset of the language features, and a subset of the functions available.
+  - As a result, some things possible in the UdonSharp environment might not be possible in the Cilbox environment.
+- UdonSharp scripts typically inherit from a class called UdonSharpBehaviour, which does not exist at all in Cilbox and in the codebase you will be working in.
+- UdonSharpBehaviour normally provides functions and virtual methods that can be overridden by the implementer.
+- Cilbox works differently: The equivalent functions are almost always located in other classes, and virtual methods are replaced by registering some of our methods into listeners located inside other classes.
+- You may sometimes find that there is no equivalent in Cilbox for some of the things you may have to convert (such as, some virtual methods have no listener equivalent).
+  - In this case you must leave those parts of the code in a non-compilable state and let the user inspect the remaining issues on their own.
+
 ## General
 
 - `class Something : UdonSharpBehaviour` generally becomes `[Cilboxable] class Something : MonoBehaviour`
