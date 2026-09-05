@@ -73,7 +73,7 @@ As the LLM agent, you may be tasked to convert a script that was initially desig
 
 - You cannot use `using` patterns such as `using (MemoryStream ...` nor `using (BinaryReader ...` nor `using (BinaryWriter ...`
 - You should use `BitConverter` as needed.
-- If you need to encode `Quaternions`, you must use `BasisCompression.QuaternionCompressor.CompressQuaternion` and `BasisCompression.QuaternionCompressor.DecompressQuaternion`
+- If you need to encode a `Quaternion`, you must use `BasisCompression.QuaternionCompressor.CompressQuaternion` and `BasisCompression.QuaternionCompressor.DecompressQuaternion`
  
 ## OnEnable pattern
 
