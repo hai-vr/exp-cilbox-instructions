@@ -36,10 +36,13 @@
   - `NetworkReady` is called when we're ready to transmit data.
   - When we are ready, we should ask the network owner to initialize us by sending them a packet.
   - The network owner should listen to that packet, and then send us the initial data using another packet.
+    - The network owner should send that packet specifically to us; not to everyone.
+  - When we receive data, we should verify that the data actually comes from the network owner using `_network.CurrentNetworkId`.
 - If `OnDeserialization` exists, we should execute `OnDeserialization` after the packet has been read.
 - If `OnSerialization` exists, we should execute `OnSerialization` before the packet is sent.
 - If `RequestSerialization` is called, we should prepare to send a packet at the end of that frame.
 - Replace `[UdonSynced]` with `/*[UdonSynced]*/`, and implement transmit those variables as part of our object state in the packet.
+
 
 ## Encoding data
 
