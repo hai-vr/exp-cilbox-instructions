@@ -89,15 +89,16 @@ private void OnEnable() { WhenEnabled(); }
 private void WhenEnabled()
 {
     if (_isEnabled) return;
+    _isEnabled = true;
 
     // Contents of the OnEnable method goes here.
-
-    _isEnabled = true;
 }
 
 private void OnDisable()
 {
     _isEnabled = false;
+
+    // Contents of the OnDisable method goes here.
 }
 ```
 
