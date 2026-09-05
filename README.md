@@ -79,16 +79,18 @@ As the LLM agent, you may be tasked to convert a script that was initially desig
 If `OnEnable` is required, then it must be modified to follow this pattern:
 
 ```csharp
-private void Start() { WhenEnabled(); }
+private void Start()
+{
+    // Contents of the Start method goes here (things that only run once in the enabled lifetime of the component).
+    WhenEnabled();
+}
 private void OnEnable() { WhenEnabled(); }
 
 private void WhenEnabled()
 {
     if (_isEnabled) return;
 
-    vrware.SetText(BasisVRWare.MsgMinigameJump);
-    _prevPos = BasisPlayersShim.Local.GetPosition();
-    _needsEval = true;
+    // Contents of the OnEnable method goes here.
 
     _isEnabled = true;
 }
