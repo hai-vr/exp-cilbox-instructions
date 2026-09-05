@@ -40,6 +40,11 @@
 - If `OnSerialization` exists, we should execute `OnSerialization` before the packet is sent.
 - If `RequestSerialization` is called, we should prepare to send a packet at the end of that frame.
 - Replace `[UdonSynced]` with `/*[UdonSynced]*/`, and implement transmit those variables as part of our object state in the packet.
+
+## Encoding data
+
+- You cannot use `using` patterns such as `using (MemoryStream ...` nor `using (BinaryReader ...` nor `using (BinaryWriter ...`
+- You should use `BitConverter` as needed.
  
 ## OnEnable pattern
 
