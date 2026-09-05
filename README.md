@@ -30,6 +30,9 @@
   - Replace with `private void WhenPlayerLeft(BasisNetworkPlayer player)`
   - Add `_network.PlayerLeft += WhenPlayerLeft;` to `Start()`
  
+- `_network.IsLocalOwner()` and `_network.SendCustomNetworkEvent(...)` cannot normally be used on `Start()` (and sometimes `OnEnable()`) as it's too early. Network operation can only occur after `NetworkReady` callback has been called once.
+  - If this pattern exists, then delegate it to execute on `WhenNetworkReady`.
+ 
 ## Synced variables
 
 - To network anything, use `_network.NetworkReady += WhenNetworkReady` and `_network.NetworkMessageReceived += WhenNetworkMessageReceived`
