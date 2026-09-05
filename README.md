@@ -73,30 +73,31 @@ As the LLM agent, you may be tasked to convert a script that was initially desig
 
 - You cannot use `using` patterns such as `using (MemoryStream ...` nor `using (BinaryReader ...` nor `using (BinaryWriter ...`
 - You should use `BitConverter` as needed.
+- If you need to encode `Quaternions`, you must use `BasisCompression.QuaternionCompressor.CompressQuaternion` and `BasisCompression.QuaternionCompressor.DecompressQuaternion`
  
 ## OnEnable pattern
 
 If `OnEnable` is required, then it must be modified to follow this pattern:
 
 ```csharp
-        private void Start() { WhenEnabled(); }
-        private void OnEnable() { WhenEnabled(); }
+private void Start() { WhenEnabled(); }
+private void OnEnable() { WhenEnabled(); }
 
-        private void WhenEnabled()
-        {
-            if (_isEnabled) return;
+private void WhenEnabled()
+{
+    if (_isEnabled) return;
 
-            vrware.SetText(BasisVRWare.MsgMinigameJump);
-            _prevPos = BasisPlayersShim.Local.GetPosition();
-            _needsEval = true;
+    vrware.SetText(BasisVRWare.MsgMinigameJump);
+    _prevPos = BasisPlayersShim.Local.GetPosition();
+    _needsEval = true;
 
-            _isEnabled = true;
-        }
+    _isEnabled = true;
+}
 
-        private void OnDisable()
-        {
-            _isEnabled = false;
-        }
+private void OnDisable()
+{
+    _isEnabled = false;
+}
 ```
 
 This is because `OnEnable` is emulated incorrectly, so it may not execute properly the first time.
