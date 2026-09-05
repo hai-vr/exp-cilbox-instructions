@@ -66,7 +66,12 @@ As the LLM agent, you may be tasked to convert a script that was initially desig
 - If `OnSerialization` exists, we should execute `OnSerialization` before the packet is sent.
 - If `RequestSerialization` is called, we should prepare to send a packet at the end of that frame.
 - Replace `[UdonSynced]` with `/*[UdonSynced]*/`, and implement transmit those variables as part of our object state in the packet.
+ 
+## Ownership transfer
 
+- Ownership transfer in the host environment Cilbox runs in doesn't work the same as in UdonSharp. Here are the differences:
+  - UdonSharp scripts assume objects have exactly one network owner at any point. The host environment in Cilbox may have zero or one owner. Ownership should be requested if it had no owner.
+  - When the owner of the object leaves, UdonSharp scripts assume the object is automatically transferred. The host environment in Cilbox does not transfer ownership automatically. Instead, all the users should request ownership of that object when the owner of that object leaves, and they will all compete for the ownership of that object. There is a networking shim that does that job.
 
 ## Encoding data
 
