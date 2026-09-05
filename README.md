@@ -1,11 +1,23 @@
 # temp-cilbox-instructions
 
+The following are instructions for use by an LLM agent to convert a script from the UdonSharp sandbox environment to the Cilbox sandbox environment.
+
 ## General
 
 - `class Something : UdonSharpBehaviour` generally becomes `[Cilboxable] class Something : MonoBehaviour`
+- The Cilbox environment does not allow many of the object accesses. In many cases you may have to look into a selection of classes called "Shims", which provide a sandboxed interface to objects and functions.
+  - Use `BasisStringDownloader` to perform URL requests for data such as JSON files.
+  - Use `BasisJson.Parse` to parse JSON.
+  - You cannot use `MonoBehaviour.Invoke` to delay a call.
+
+## Sandbox quirks
+
 - Never use `Array.Empty<...>()`. Using it may cause the following errors:
   - `Privilege failed for System.Array.Empty generic argument 0 type`
   - `CilboxException: Error: Could not find reference to: [mscorlib][System.Array]`
+- Trying to write a bool into a bool array fails with the following error:
+  - `not a widening conversion`
+  - Recommended fix for now is to use a byte array instead, but add inline comments to signal that the data was originally a bool.
 
 ## Objects
 
