@@ -19,6 +19,7 @@ As the LLM agent, you may be tasked to convert a script that was initially desig
   - Use `BasisStringDownloader` to perform URL requests for data such as JSON files.
   - Use `BasisJson.Parse` to parse JSON.
   - You cannot use `MonoBehaviour.Invoke` to delay a call.
+- Teleportation should be done using `BasisLocalPlayer.Instance.Teleport(some.position, some.rotation)`. Replace `.TeleportTo(...)` with it.
 
 ## Sandbox quirks
 
@@ -108,8 +109,3 @@ private void OnDisable()
 ```
 
 This is because `OnEnable` is emulated incorrectly, so it may not execute properly the first time.
-
-## Teleport
-
-- Teleportation should be done using `BasisLocalPlayer.Instance.Teleport(some.position, some.rotation)`
-  - Replace `.TeleportTo(...)` with it.
